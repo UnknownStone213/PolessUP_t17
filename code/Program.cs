@@ -24,6 +24,7 @@ namespace code
                 }
             }
 
+            // amount of combinations
             double amount = 0;
             for (int i = 0; i < noNums.Length; i++)
             {
@@ -31,7 +32,7 @@ namespace code
             }
             string[] combinations = new string[(int)amount + 1];
 
-            // create combinations
+            // create combinations of binary numbers (001, 010...) that will be used to determine upper/lower case letters
             for (int i = 0; i < combinations.Length; i++)
             {
                 string num = ""; // binary number 0101.... for combinations
@@ -55,13 +56,11 @@ namespace code
                 combinations[i] = num;
             }
 
-            // check combinations for all numbers (upper/lower case)
-            Console.WriteLine();
+            // check combinations for all letters (upper = 1 / lower = 0)
             for (int i = 0; i < combinations.Length; i++)
             {
                 Console.WriteLine($"combination[{i}] = " + combinations[i]);
             }
-            Console.WriteLine();
 
             // output
             Console.WriteLine("\nOutput:");
@@ -71,21 +70,19 @@ namespace code
                 int index = 0;
                 for (int i2 = 0; i2 < s.Length; i2++)
                 {
-                    if (checkNum[i2] == true) // check if number
+                    if (s[i2] == '0' || s[i2] == '1' || s[i2] == '2' || s[i2] == '3' || s[i2] == '4' || s[i2] == '5' || s[i2] == '6' || s[i2] == '7' || s[i2] == '8' || s[i2] == '9') // if number
                     {
                         outputs[i] += s[i2];
                     }
-                    else
+                    else // if letter
                     {
                         if (combinations[i][index] == '0')
                         {
-                            Console.WriteLine("1)");
                             outputs[i] += Convert.ToString(s[i2]).ToLower();
                             index++;
                         }
                         else if (combinations[i][index] == '1')
                         {
-                            Console.WriteLine("2)");
                             outputs[i] += Convert.ToString(s[i2]).ToUpper();
                             index++;
                         }
